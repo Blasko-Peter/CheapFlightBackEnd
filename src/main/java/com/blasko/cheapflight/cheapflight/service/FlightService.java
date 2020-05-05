@@ -16,8 +16,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class FlightService {
 
     private Random random = new Random();
-    DecimalFormat df = new DecimalFormat("#.##");
-    String companies[] = new String[] {"WizzAir", "EasyJet", "RyanAir", "Air France", "Lufthansa"};
+    private static DecimalFormat df = new DecimalFormat("0.00");
+    private String companies[] = new String[] {"WizzAir", "EasyJet", "RyanAir", "Air France", "Lufthansa"};
 
     @Autowired
     private FlightRepository flightRepository;
@@ -55,7 +55,8 @@ public class FlightService {
         double min = 50;
         double max = 200;
         double randomDouble = min + ((max - min) * random.nextDouble());
-        return randomDouble;
+        double roundedDouble = Math.round(randomDouble * 100.0) / 100.0;
+        return roundedDouble;
     }
 
 }

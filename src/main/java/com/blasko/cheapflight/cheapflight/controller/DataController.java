@@ -1,15 +1,14 @@
 package com.blasko.cheapflight.cheapflight.controller;
 
 import com.blasko.cheapflight.cheapflight.model.Flight;
+import com.blasko.cheapflight.cheapflight.model.FlightsRequest;
 import com.blasko.cheapflight.cheapflight.service.FlightService;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +30,13 @@ public class DataController {
         }
         List<String> allCities = Arrays.asList(cities);
         return allCities;
+    }
+
+    @PostMapping(value = "/getData")
+    public String getActualFlights(@RequestBody FlightsRequest flightsRequest){
+        System.out.println(flightsRequest.getStartTown());
+        System.out.println(flightsRequest.getArriveTown());
+        return "success";
     }
 
     @GetMapping(value = "/")
