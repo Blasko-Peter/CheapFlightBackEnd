@@ -27,7 +27,7 @@ public class DataController {
     public List<String> getAllCities() {
         List<Flight> checkedDatabase = flightService.findByAllFlight();
         if(checkedDatabase.size() == 0) {
-            System.out.println("load up database");
+            flightService.databaseInitializer(cities, 2000);
         }
         List<String> allCities = Arrays.asList(cities);
         return allCities;
