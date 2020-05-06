@@ -36,6 +36,7 @@ public class DataController {
     public String getActualFlights(@RequestBody FlightsRequest flightsRequest){
         System.out.println(flightsRequest.getStartTown());
         System.out.println(flightsRequest.getArriveTown());
+        System.out.println(flightsRequest.getStartTime());
         return "success";
     }
 
