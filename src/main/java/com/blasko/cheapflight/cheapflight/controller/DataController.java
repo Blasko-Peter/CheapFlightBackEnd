@@ -33,19 +33,17 @@ public class DataController {
     }
 
     @PostMapping(value = "/getData")
-    public String getActualFlights(@RequestBody FlightsRequest flightsRequest){
-        System.out.println(flightsRequest.getStartTown());
-        System.out.println(flightsRequest.getArriveTown());
-        System.out.println(flightsRequest.getStartTime());
-        return "success";
+    public List<Flight> getActualFlights(@RequestBody FlightsRequest flightsRequest){
+        return flightService.getActualFlights(flightsRequest);
     }
-
-    @GetMapping(value = "/")
-    public String checkFirefoxBySelenium(){
-        FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
-        WebDriver x = new FirefoxDriver();
-        x.get("https://group.accor.com/en");
-        return "good";
-    }
+    
+    //CHECKED SELENIUM
+    //@GetMapping(value = "/")
+    //public String checkFirefoxBySelenium(){
+    //    FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
+    //    WebDriver x = new FirefoxDriver();
+    //    x.get("https://group.accor.com/en");
+    //    return "good";
+    //}
 
 }

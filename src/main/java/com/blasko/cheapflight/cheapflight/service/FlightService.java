@@ -1,6 +1,7 @@
 package com.blasko.cheapflight.cheapflight.service;
 
 import com.blasko.cheapflight.cheapflight.model.Flight;
+import com.blasko.cheapflight.cheapflight.model.FlightsRequest;
 import com.blasko.cheapflight.cheapflight.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,10 @@ public class FlightService {
         double randomDouble = min + ((max - min) * random.nextDouble());
         double roundedDouble = Math.round(randomDouble * 100.0) / 100.0;
         return roundedDouble;
+    }
+
+    public List<Flight> getActualFlights(FlightsRequest flightsRequest){
+        return flightRepository.findFlightByStartTownAndArriveTownAndStartTime(flightsRequest.getStartTown(), flightsRequest.getArriveTown(), flightsRequest.getStartTime());
     }
 
 }
