@@ -3,13 +3,11 @@ package com.blasko.cheapflight.cheapflight.controller;
 import com.blasko.cheapflight.cheapflight.model.Flight;
 import com.blasko.cheapflight.cheapflight.model.FlightsRequest;
 import com.blasko.cheapflight.cheapflight.service.FlightService;
-import io.github.bonigarcia.wdm.DriverManagerType;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import com.blasko.cheapflight.cheapflight.service.SeleniumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,6 +19,9 @@ public class DataController {
 
     @Autowired
     private FlightService flightService;
+
+    @Autowired
+    private SeleniumService seleniumService;
 
     @GetMapping(value = "/getData")
     public List<String> getAllCities() {
@@ -36,14 +37,11 @@ public class DataController {
     public List<Flight> getActualFlights(@RequestBody FlightsRequest flightsRequest){
         return flightService.getActualFlights(flightsRequest);
     }
-    
-    //CHECKED SELENIUM
-    //@GetMapping(value = "/")
-    //public String checkFirefoxBySelenium(){
-    //    FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
-    //    WebDriver x = new FirefoxDriver();
-    //    x.get("https://group.accor.com/en");
-    //    return "good";
-    //}
+
+
+    @PostMapping(value = "/selenium")
+    public List<Flight> checkChromewBySeleniumP(@RequestBody FlightsRequest flightsRequest) {
+        return seleniumService.getActualFlights(flightsRequest);
+    }
 
 }
