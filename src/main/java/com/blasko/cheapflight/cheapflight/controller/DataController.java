@@ -35,12 +35,13 @@ public class DataController {
 
     @PostMapping(value = "/getData")
     public List<Flight> getActualFlights(@RequestBody FlightsRequest flightsRequest){
+        List<Flight> flightsNow = seleniumService.getActualFlights(flightsRequest);
         return flightService.getActualFlights(flightsRequest);
     }
 
 
     @PostMapping(value = "/selenium")
-    public List<Flight> checkChromewBySeleniumP(@RequestBody FlightsRequest flightsRequest) {
+    public List<Flight> checkChromeBySeleniumP(@RequestBody FlightsRequest flightsRequest) {
         return seleniumService.getActualFlights(flightsRequest);
     }
 
