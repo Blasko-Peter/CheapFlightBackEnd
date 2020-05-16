@@ -37,7 +37,10 @@ public class SeleniumService {
         driver.findElement(By.id("from0")).sendKeys(startTown);
         Thread.sleep(1000);
         driver.findElement(By.id("from0")).sendKeys(Keys.ENTER);
-
+        //Print arriveTown
+        driver.findElement(By.id("to0")).sendKeys(arriveTown);
+        Thread.sleep(1000);
+        driver.findElement(By.id("to0")).sendKeys(Keys.ENTER);
 
 
         //Close the website
