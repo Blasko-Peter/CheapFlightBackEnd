@@ -41,10 +41,28 @@ public class SeleniumService {
         driver.findElement(By.id("to0")).sendKeys(arriveTown);
         Thread.sleep(1000);
         driver.findElement(By.id("to0")).sendKeys(Keys.ENTER);
+        //Choose the date
+        String day = String.valueOf(date.getDayOfMonth());
+        int calendarDayIndex = 0;
+        String calendarDay = "";
+        int index = 0;
+        for( index = 1; index < 39; index++){
+            String calendarDayGetText = driver.findElement(By.xpath("//div[@class='calendar__wrapper clearfix']//div[1]//div[3]//div["+index+"]")).getText();
+            if(!calendarDayGetText.equals("")){
+                calendarDayIndex++;
+                calendarDay = calendarDayGetText.substring(0, String.valueOf(calendarDayIndex).length());
+                if(calendarDay.equals(day)){
+                    System.out.println("a nap: " + calendarDay);
+                    break;
+                }
+            }
+        }
+        driver.findElement(By.xpath("//div[@class='calendar__single-month active']//div["+index+"]//a[1]")).sendKeys(Keys.ENTER);
+
 
 
         //Close the website
-        driver.close();
+        //driver.close();
     }
 
 }
