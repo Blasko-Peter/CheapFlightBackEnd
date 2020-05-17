@@ -6,6 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,6 @@ public class SeleniumService {
                 calendarDayIndex++;
                 calendarDay = calendarDayGetText.substring(0, String.valueOf(calendarDayIndex).length());
                 if(calendarDay.equals(day)){
-                    System.out.println("a nap: " + calendarDay);
                     break;
                 }
             }
@@ -60,7 +60,10 @@ public class SeleniumService {
         driver.findElement(By.xpath("//div[@class='calendar__single-month active']//div["+index+"]//a[1]")).sendKeys(Keys.ENTER);
         //Click the search button
         driver.findElement(By.id("searchNow")).click();
-
+        Thread.sleep(10000);
+        //Find the web elements - the flights
+        List<WebElement> flightsFromTheWebsite = driver.findElements(By.className("contract-block"));
+        System.out.println(flightsFromTheWebsite.size());
 
         //Close the website
         //driver.close();
