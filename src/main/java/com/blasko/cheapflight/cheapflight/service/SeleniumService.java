@@ -46,7 +46,7 @@ public class SeleniumService {
         int calendarDayIndex = 0;
         String calendarDay = "";
         int index = 0;
-        for( index = 1; index < 39; index++){
+        for(index = 1; index < 39; index++){
             String calendarDayGetText = driver.findElement(By.xpath("//div[@class='calendar__wrapper clearfix']//div[1]//div[3]//div["+index+"]")).getText();
             if(!calendarDayGetText.equals("")){
                 calendarDayIndex++;
@@ -58,7 +58,8 @@ public class SeleniumService {
             }
         }
         driver.findElement(By.xpath("//div[@class='calendar__single-month active']//div["+index+"]//a[1]")).sendKeys(Keys.ENTER);
-
+        //Click the search button
+        driver.findElement(By.id("searchNow")).click();
 
 
         //Close the website
