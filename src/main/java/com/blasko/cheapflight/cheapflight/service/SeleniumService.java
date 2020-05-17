@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +64,26 @@ public class SeleniumService {
         Thread.sleep(10000);
         //Find the web elements - the flights
         List<WebElement> flightsFromTheWebsite = driver.findElements(By.className("contract-block"));
-        System.out.println(flightsFromTheWebsite.size());
+        //Iterate on flights and find all data for my flight
+        for(WebElement flight : flightsFromTheWebsite){
+            System.out.println("-");
+            String company = flight.findElement(By.className("airline__name")).getText();
+            System.out.println(company);
+            List<WebElement> flightTimes = flight.findElements(By.className("is--flight-time"));
+            LocalTime startTime = LocalTime.parse(flightTimes.get(0).getText().substring(0, 5));
+            LocalTime arriveTime = LocalTime.parse(flightTimes.get(1).getText().substring(0, 5));
+            System.out.println(startTime);
+            System.out.println(arriveTime);
+            String price = flight.findElement(By.className("fare__amount--block")).getText();
+            String[] pricePieces = price.split(",|\\ ");
+            String realPrice = "";
+            for(String pp : pricePieces){
+                realPrice += pp;
+            }
+            double actualPrice = Double.parseDouble(realPrice.substring(1, realPrice.length()));
+            System.out.println(actualPrice);
+            System.out.println("--");
+        }
 
         //Close the website
         //driver.close();
