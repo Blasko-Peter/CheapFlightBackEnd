@@ -66,14 +66,10 @@ public class SeleniumService {
         List<WebElement> flightsFromTheWebsite = driver.findElements(By.className("contract-block"));
         //Iterate on flights and find all data for my flight
         for(WebElement flight : flightsFromTheWebsite){
-            System.out.println("-");
             String company = flight.findElement(By.className("airline__name")).getText();
-            System.out.println(company);
             List<WebElement> flightTimes = flight.findElements(By.className("is--flight-time"));
             LocalTime startTime = LocalTime.parse(flightTimes.get(0).getText().substring(0, 5));
             LocalTime arriveTime = LocalTime.parse(flightTimes.get(1).getText().substring(0, 5));
-            System.out.println(startTime);
-            System.out.println(arriveTime);
             String price = flight.findElement(By.className("fare__amount--block")).getText();
             String[] pricePieces = price.split(",|\\ ");
             String realPrice = "";
@@ -81,12 +77,18 @@ public class SeleniumService {
                 realPrice += pp;
             }
             double actualPrice = Double.parseDouble(realPrice.substring(1, realPrice.length()));
-            System.out.println(actualPrice);
-            System.out.println("--");
+            Flight newFlight = new Flight();
+            newFlight.setCompany(company);
+            newFlight.setStartTown(startTown);
+            newFlight.setArriveTown(arriveTown);
+            newFlight.setDate(date);
+            newFlight.setStartTime(startTime);
+            newFlight.setArriveTime(arriveTime);
+            newFlight.setPrice(actualPrice);
+            flights.add(newFlight);
         }
-
         //Close the website
-        //driver.close();
+        driver.close();
     }
 
 }
