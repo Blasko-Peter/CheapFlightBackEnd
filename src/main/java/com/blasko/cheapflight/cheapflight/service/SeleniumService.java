@@ -24,6 +24,13 @@ public class SeleniumService {
         flights = new ArrayList<>();
         try {
             checkedWebsiteBySelenium(flightsRequest.getStartTown(), flightsRequest.getArriveTown(), flightsRequest.getStartTime());
+            if(flights.size() > 5){
+                List<Flight> topFiveFlights = new ArrayList<>();
+                for(int i = 0; i < 5; i++){
+                    topFiveFlights.add(flights.get(i));
+                }
+                flights = topFiveFlights;
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
