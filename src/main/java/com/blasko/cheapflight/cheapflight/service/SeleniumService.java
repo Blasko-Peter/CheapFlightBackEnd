@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -39,10 +39,16 @@ public class SeleniumService {
 
     private void checkedWebsiteBySelenium(String startTown, String arriveTown, LocalDate date) throws InterruptedException {
         //Open the website
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        WebDriverManager.firefoxdriver().setup();
+        WebDriver driver = new FirefoxDriver();
         driver.get("https://www.cheapoair.com/");
         //Print startTown
+        driver.findElement(By.id("from0")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("from0")).sendKeys(Keys.CLEAR);
+        Thread.sleep(1000);
+        driver.findElement(By.id("from0")).click();
+        Thread.sleep(1000);
         driver.findElement(By.id("from0")).sendKeys(startTown);
         Thread.sleep(1000);
         driver.findElement(By.id("from0")).sendKeys(Keys.ENTER);

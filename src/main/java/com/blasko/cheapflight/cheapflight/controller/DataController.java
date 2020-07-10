@@ -25,10 +25,10 @@ public class DataController {
 
     @GetMapping(value = "/getData")
     public List<String> getAllCities() {
-        List<Flight> checkedDatabase = flightService.findByAllFlight();
-        if(checkedDatabase.size() == 0) {
-            flightService.databaseInitializer(cities, 2000);
-        }
+        //List<Flight> checkedDatabase = flightService.findByAllFlight();
+        //if(checkedDatabase.size() == 0) {
+        //    flightService.databaseInitializer(cities, 2000);
+        //}
         List<String> allCities = Arrays.asList(cities);
         return allCities;
     }
